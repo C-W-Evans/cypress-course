@@ -17,4 +17,5 @@ it('displays I for G - key : 2', () => {
     // verification du resultat (message chiffré)
     cy.dataCy('cypher-output').should('have.text', 'I')
     })
+    
 })
