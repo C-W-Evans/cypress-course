@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar's Cipher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Caesar's Cipher</h1>
+    <label for="key">Caesar's Key:</label>
+    <input type="number" id="key" min="0" step="1"
+    data-cy='cypher-key'><br>
+
+    <label for="message">Message:</label>
+    <input type="text" id="message"
+    data-cy='cypher-msg'><br>
+
+    <button onclick="cypherMessage()" data-cy="cypher-btn"> 
+    Cypher</button>
+
+    <h2>Cyphered Message:</h2>
+    <p id="output" data-cy="cypher-output"></p>
+
+    <script>
+        function cypherMessage() {
+            let key = parseInt(document.getElementById('key').value) || 0;
+            let message = document.getElementById('message').value;
+            let result = '';
+            
+            for (let i = 0; i < message.length; i++) {
+                let char = message[i];
+                if (char.match(/[a-z]/i)) {
+                    let code = message.charCodeAt(i);
+                    let shift = code >= 65 && code <= 90 ? 65 : 97;
+                    result += String.fromCharCode(((code - shift + key) % 26) + shift);
+                } else {
+                    result += char;
+                }
+            }
+            document.getElementById('output').innerText = result;
+        }
+    </script>
+</body>
+</html>
